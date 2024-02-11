@@ -1,0 +1,53 @@
+﻿@page "/books"
+@using LibraryAppBlazor.Models
+@inject LibraryAppBlazor.Repository.IRepository<Book> bookRepository
+@inject NavigationManager NavManager
+
+<div class="d-flex justify-content-center">
+    <div class="custom-container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="mb-0">Zoznam kníh</h1>
+            <a class="btn btn-dark" href="book-form">Pridať knihu</a>
+        </div>
+        <table class="table table-borderless table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Názov</th>
+                    <th scope="col">Autor</th>
+                    <th scope="col">Dostupnosť</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in @BookList)
+                {
+                    <tr>
+                        <td class="align-middle">@book.Title</td>
+                        <td class="align-middle">@book.Author</td>
+                        <td class="align-middle">
+                            @if (@book.IsAvailable)
+                            {
+                                <span class="badge rounded-pill bg-success">Dostupná</span>
+                            }
+                            else
+                            {
+                                <span class="badge rounded-pill bg-dark">Nedostupná</span>
+                            }
+                        </td>
+                        <td>
+                            @* <form method="post">
+                        <button asp-page-handler="openModal" asp-route-id="@book.Id" type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#check-out-modal">Požičať</button>
+                        </form> *@
+                        </td>
+                        <td class="align-middle d-flex align-items-center justify-content-end">
+                            <a class="btn btn-link" href="book-form/@book.Id">Upraviť</a>
+                            <button class="btn btn-link" @onclick="e => DeleteBook(book.Id)">Vymazať</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

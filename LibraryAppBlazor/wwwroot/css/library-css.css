@@ -1,0 +1,117 @@
+﻿/* bootstrap overrides */
+
+:root {
+    --bs-body-font-family: 'Poppins', sans-serif;
+    --bs-link-color: #007C73;
+}
+
+.table {
+    --bs-table-striped-bg: #e9f9ee;
+}
+
+.custom-container {
+    width: 70rem;
+}
+
+.btn-primary {
+    --bs-btn-bg: #15d16e;
+    --bs-btn-border-color: var(--bs-btn-bg);
+    --bs-btn-hover-bg: #11b15d;
+    --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
+}
+
+.validation-errors {
+    color: var(--bs-danger);
+}
+
+.form-control.invalid {
+    --bs-border-color: var(--bs-danger);
+}
+
+
+/* svg animation */
+svg#freepik_stories-book-lover:not(.animated) .animable {
+    opacity: 0;
+}
+
+svg#freepik_stories-book-lover.animated #freepik--background-simple--inject-32 {
+    animation: 1s 1 forwards cubic-bezier(.36,-0.01,.5,1.38) slideLeft;
+    animation-delay: 0s;
+}
+
+svg#freepik_stories-book-lover.animated #freepik--Books--inject-32 {
+    animation: 1s 1 forwards cubic-bezier(.36,-0.01,.5,1.38) slideLeft;
+    animation-delay: 0s;
+}
+
+svg#freepik_stories-book-lover.animated #freepik--Plants--inject-32 {
+    animation: 1s 1 forwards cubic-bezier(.36,-0.01,.5,1.38) slideDown;
+    animation-delay: 0s;
+}
+
+svg#freepik_stories-book-lover.animated #freepik--Character--inject-32 {
+    animation: 1s 1 forwards cubic-bezier(.36,-0.01,.5,1.38) lightSpeedRight;
+    animation-delay: 0s;
+}
+
+svg#freepik_stories-book-lover.animated #freepik--Floor--inject-32 {
+    animation: 1s 1 forwards cubic-bezier(.36,-0.01,.5,1.38) slideRight;
+    animation-delay: 0s;
+}
+
+@keyframes slideLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes lightSpeedRight {
+    from {
+        transform: translate3d(50%, 0, 0) skewX(-20deg);
+        opacity: 0;
+    }
+
+    60% {
+        transform: skewX(10deg);
+        opacity: 1;
+    }
+
+    80% {
+        transform: skewX(-2deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes slideRight {
+    0% {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
