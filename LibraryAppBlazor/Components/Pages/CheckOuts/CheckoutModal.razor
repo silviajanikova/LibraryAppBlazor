@@ -1,0 +1,35 @@
+﻿<div class="modal fade" id="checkout-modal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Požičať knihu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label>Názov knihy</label>
+                    <div class="fw-bolder">@BookToCheckout.Title</div>
+                </div>
+                <EditForm OnValidSubmit="@BookCheckout" Model="CheckoutData" FormName="CheckoutForm">
+                    <div class="mb-3">
+                        <label class="form-label" for="input-member">Čitateľ</label>
+                        <select @bind="@SelectedMemberId" class="form-select" id="input-member">
+                            @foreach (var member in MemberList)
+                            {
+                                <option value="@member.Id">@member.Firstname&nbsp;@member.Surname</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="input-checkout-date">Dátum požičania</label>
+                        <InputDate class="form-control" id="input-checkout-date" TValue="DateTime" @bind-Value="@CheckoutData.CheckOutDate" />
+                    </div>
+                </EditForm>
+            </div>
+            <div class="modal-footer">
+                <button @onclick="BookCheckout" type="button" class="btn btn-primary" data-bs-dismiss="modal">Uložiť</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušiť</button>
+            </div>
+        </div>
+    </div>
+</div>
