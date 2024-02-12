@@ -1,5 +1,6 @@
 ﻿using LibraryAppBlazor.Data;
 using LibraryAppBlazor.Models;
+using LibraryAppBlazor.Repository;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +11,16 @@ namespace LibraryAppBlazor.Components.Pages.CheckOuts
         [Inject]
         IDbContextFactory<LibraryAppContext> dbContextFactory { get; set; }
 
+        [Inject]
+        protected IRepository<CheckOutRecord> checkoutRepository { get; set; }
+
+        [Inject]
+        IRepository<Book> bookRepository { get; set; }
+
         public CheckOutRecord CheckoutDetails { get; set; } = new();
+
+        [Parameter]
+        public EventCallback onReturnButtonClicked { get; set; }
 
         protected override void OnInitialized()
         {
@@ -31,6 +41,16 @@ namespace LibraryAppBlazor.Components.Pages.CheckOuts
             }
             CheckoutDetails = checkout;
             StateHasChanged();
+        }
+
+        public void ReturnBook() { 
+            CheckoutDetails.ReturnDate = DateTime.Now;
+            checkoutRepository.Edit(CheckoutDetails);
+
+            CheckoutDetails.Book.IsAvailable = true;
+            bookRepository.Edit(CheckoutDetails.Book);
+
+            onReturnButtonClicked.InvokeAsync();
         }
     }
 }

@@ -41,11 +41,10 @@ namespace LibraryAppBlazor.Components.Pages.Books
         public void DeleteBook(Guid id)
         {
             var book = bookRepository.GetById(id);
-            var a = bookRepository.Delete(book);
+            bookRepository.Delete(book);
 
             NavManager.NavigateTo("/Books");
-            BookList = bookRepository.List();
-
+            UpdateBookList();
         }
 
         // checkout modal
@@ -64,7 +63,7 @@ namespace LibraryAppBlazor.Components.Pages.Books
                 BookToCheckout.IsAvailable = false;
                 bookRepository.Edit(BookToCheckout);
 
-                BookList = bookRepository.List();
+                UpdateBookList();
             }
         }
 
@@ -88,6 +87,10 @@ namespace LibraryAppBlazor.Components.Pages.Books
         // detail modal
         public void OpenCheckoutDetailModal(Guid id) {
             childDetailsModal.GetCheckOutByBookId(id);
+        }
+
+        public void UpdateBookList() {
+            BookList = bookRepository.List();
         }
     }
 }
