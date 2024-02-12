@@ -12,10 +12,11 @@
             <thead>
                 <tr>
                     <th scope="col">Názov knihy</th>
+                    <th scope="col">Stav knihy</th>
                     <th scope="col">Čitateľ</th>
                     <th scope="col">Dátum požičania</th>
                     <th scope="col">Dátum vrátenia</th>
-                    <th scope="col">Stav knihy</th>
+                    <th scope="col">Stav výpožičky</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,11 +24,21 @@
                 {
                     <tr>
                         <td class="align-middle">@checkout.Book.Title</td>
-                        <td class="align-middle">@checkout.Member.Firstname&nbsp;@checkout.Member.Surname</td>
-                        <td class="align-middle">@checkout.CheckOutDate</td>
-                        <td class="align-middle">@checkout.ReturnDate</td>
-                        <td>
+                        <td class="align-middle">
                             <BookStatusBadge IsAvailable="@checkout.Book.IsAvailable" />
+                        </td>
+                        <td class="align-middle">@checkout.Member.Firstname&nbsp;@checkout.Member.Surname</td>
+                        <td class="align-middle">@checkout.CheckOutDate.ToShortDateString()</td>
+                        <td class="align-middle">@checkout.ReturnDate?.ToShortDateString()</td>
+                        <td>
+                            @if(checkout.ReturnDate.HasValue)
+                            {
+                                <span class="badge rounded-pill bg-dark">Vrátená</span>
+                            }
+                            else
+                            {
+                                <span class="badge rounded-pill bg-warning">Požičaná</span>
+                            }
                         </td>
                     </tr>
                 }

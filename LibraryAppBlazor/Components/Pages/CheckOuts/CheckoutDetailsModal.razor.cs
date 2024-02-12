@@ -44,7 +44,7 @@ namespace LibraryAppBlazor.Components.Pages.CheckOuts
         }
 
         public void ReturnBook() { 
-            CheckoutDetails.ReturnDate = DateTime.Now;
+            CheckoutDetails.ReturnDate = DateTime.Now.Date;
             checkoutRepository.Edit(CheckoutDetails);
 
             CheckoutDetails.Book.IsAvailable = true;
