@@ -14,6 +14,7 @@ namespace LibraryAppBlazor.Components.Pages.Books
         {
             await base.OnInitializedAsync();
 
+            // get data from existing book
             if (BookId != null)
             {
                 BookData = bookRepository.GetById(Guid.Parse(BookId));
@@ -32,20 +33,22 @@ namespace LibraryAppBlazor.Components.Pages.Books
             // add book
             if (BookId == null)
             {
-                BookData.Id = Guid.NewGuid();
-                BookData.IsAvailable = true;
-                bookRepository.Add(BookData);
-
-                NavManager.NavigateTo("/Books");
+                CreateBook();
             }
 
             // edit existing book
             else
             {
                 bookRepository.Edit(BookData);
-
-                NavManager.NavigateTo("/Books");
             }
+
+            NavManager.NavigateTo("/Books");
+        }
+
+        public void CreateBook() {
+            BookData.Id = Guid.NewGuid();
+            BookData.IsAvailable = true;
+            bookRepository.Add(BookData);
         }
     }
 }
