@@ -1,4 +1,5 @@
 ﻿using LibraryAppBlazor.Models;
+using LibraryAppBlazor.Repository;
 using Microsoft.AspNetCore.Components;
 
 namespace LibraryAppBlazor.Components.Pages.Books
@@ -6,6 +7,9 @@ namespace LibraryAppBlazor.Components.Pages.Books
     public partial class BookForm
     {
         public Book BookData { get; set; } = new();
+
+        [Inject]
+        IRepository<Book> bookRepository { get; set; }
 
         [Parameter]
         public string BookId { get; set; }

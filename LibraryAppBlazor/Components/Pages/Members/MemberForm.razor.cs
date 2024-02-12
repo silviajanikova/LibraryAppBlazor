@@ -1,10 +1,14 @@
 ﻿using LibraryAppBlazor.Models;
+using LibraryAppBlazor.Repository;
 using Microsoft.AspNetCore.Components;
 
 namespace LibraryAppBlazor.Components.Pages.Members
 {
     public partial class MemberForm
     {
+        [Inject]
+        IRepository<Member> memberRepository { get; set; }
+
         public Member MemberData { get; set; } = new();
 
         [Parameter]
