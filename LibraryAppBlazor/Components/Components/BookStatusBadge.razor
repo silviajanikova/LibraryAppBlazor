@@ -1,0 +1,13 @@
+﻿@if (@IsAvailable)
+{
+    <span class="badge rounded-pill bg-success">Dostupná</span>
+}
+else
+{
+    <span class="badge rounded-pill bg-warning">Nedostupná</span>
+}
+
+@code {
+    [Parameter]
+    public bool IsAvailable { get; set; }
+}
