@@ -2,7 +2,8 @@
 @using LibraryAppBlazor.Data
 @using LibraryAppBlazor.Models
 @using Microsoft.EntityFrameworkCore
-
+@using LibraryAppBlazor.Components.Components
+@using LibraryAppBlazor.Components.Pages.CheckOuts
 
 @inject NavigationManager NavManager
 
@@ -29,19 +30,16 @@
                         <td class="align-middle">@book.Title</td>
                         <td class="align-middle">@book.Author</td>
                         <td class="align-middle">
-                            @if (@book.IsAvailable)
-                            {
-                                <span class="badge rounded-pill bg-success">Dostupná</span>
-                            }
-                            else
-                            {
-                                <span class="badge rounded-pill bg-dark">Nedostupná</span>
-                            }
+                            <BookStatusBadge IsAvailable="@book.IsAvailable" />
                         </td>
-                        <td class="align-middle">
+                        <td class="align-middle text-center">
                             @if (@book.IsAvailable)
                             {
                                 <button @onclick="e => OpenCheckoutModal(book.Id)" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#checkout-modal">Požičať</button>
+                            }
+                            else
+                            {
+                                <button @onclick="e => OpenCheckoutDetailModal(book.Id)" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#checkout-details-modal">Detaily výpožičky</button>
                             }
                         </td>
                         <td class="align-middle d-flex align-items-center justify-content-end">
@@ -65,7 +63,7 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <label>Názov knihy</label>
-                    <div>@BookToCheckout.Title</div>
+                    <div class="fw-bolder">@BookToCheckout.Title</div>
                 </div>
                 <EditForm OnValidSubmit="@BookCheckout" Model="CheckoutData" FormName="CheckoutForm">
                     <div class="mb-3">
@@ -90,4 +88,8 @@
         </div>
     </div>
 </div>
+
+<CheckoutDetailsModal @ref="childDetailsModal" />
+
+
 

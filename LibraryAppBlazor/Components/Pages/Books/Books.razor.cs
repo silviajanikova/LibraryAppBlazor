@@ -1,4 +1,5 @@
-﻿using LibraryAppBlazor.Data;
+﻿using LibraryAppBlazor.Components.Pages.CheckOuts;
+using LibraryAppBlazor.Data;
 using LibraryAppBlazor.Models;
 using LibraryAppBlazor.Repository;
 using Microsoft.AspNetCore.Components;
@@ -15,9 +16,6 @@ namespace LibraryAppBlazor.Components.Pages.Books
         IRepository<Member> memberRepository { get; set; }
 
         [Inject]
-        IRepository<CheckOutRecord> checkoutRepository { get; set; }
-
-        [Inject]
         IDbContextFactory<LibraryAppContext> dbContextFactory { get; set; }
 
         public IEnumerable<Book> BookList { get; set; } = new List<Book>();
@@ -27,6 +25,8 @@ namespace LibraryAppBlazor.Components.Pages.Books
         public Guid SelectedMemberId { get; set; } = Guid.Empty;
 
         public Book BookToCheckout { get; set; } = new();
+
+        private CheckoutDetailsModal childDetailsModal { get; set; }
 
         public List<Member> MemberList { get; set; } = new();
 
@@ -48,6 +48,7 @@ namespace LibraryAppBlazor.Components.Pages.Books
 
         }
 
+        // checkout modal
         public void OpenCheckoutModal(Guid id)
         {
             BookToCheckout = bookRepository.GetById(id);
@@ -57,7 +58,7 @@ namespace LibraryAppBlazor.Components.Pages.Books
         {
             if (BookToCheckout.IsAvailable)
             {
-                CreateCheckoutrecord();
+                CreateCheckoutRecord();
 
                 // update book
                 BookToCheckout.IsAvailable = false;
@@ -67,7 +68,7 @@ namespace LibraryAppBlazor.Components.Pages.Books
             }
         }
 
-        public void CreateCheckoutrecord()
+        public void CreateCheckoutRecord()
         {
             var member = memberRepository.GetById(SelectedMemberId);
             CheckoutData.Id = Guid.NewGuid();
@@ -82,6 +83,11 @@ namespace LibraryAppBlazor.Components.Pages.Books
                 context.CheckOutRecord.Add(CheckoutData);
                 context.SaveChanges();
             }
+        }
+
+        // detail modal
+        public void OpenCheckoutDetailModal(Guid id) {
+            childDetailsModal.GetCheckOutByBookId(id);
         }
     }
 }

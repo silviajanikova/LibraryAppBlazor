@@ -1,0 +1,26 @@
+﻿<div class="modal fade" id="checkout-details-modal" tabindex="-1" aria-labelledby="checkoutDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detaily výpožičky</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <label>Názov knihy</label>
+                        <div class="fw-bolder">@CheckoutDetails.Book.Title</div>
+                    </div>
+                    <div class="col">
+                        <label>Čitateľ</label>
+                        <div class="fw-bolder">@CheckoutDetails.Member.Firstname&nbsp;@CheckoutDetails.Member.Surname</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning">Vrátiť</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušiť</button>
+            </div>
+        </div>
+    </div>
+</div>

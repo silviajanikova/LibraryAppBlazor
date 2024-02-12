@@ -1,5 +1,6 @@
 ﻿@page "/checkouts"
 @using LibraryAppBlazor.Models
+@using LibraryAppBlazor.Components.Components
 @inject NavigationManager NavManager
 
 <div class="d-flex justify-content-center">
@@ -26,14 +27,7 @@
                         <td class="align-middle">@checkout.CheckOutDate</td>
                         <td class="align-middle">@checkout.ReturnDate</td>
                         <td>
-                            @if (@checkout.Book.IsAvailable)
-                            {
-                                <span class="badge rounded-pill bg-success">Dostupná</span>
-                            }
-                            else
-                            {
-                                <span class="badge rounded-pill bg-dark">Nedostupná</span>
-                            }
+                            <BookStatusBadge IsAvailable="@checkout.Book.IsAvailable" />
                         </td>
                     </tr>
                 }
