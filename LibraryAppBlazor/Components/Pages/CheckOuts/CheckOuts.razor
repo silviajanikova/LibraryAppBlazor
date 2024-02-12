@@ -1,0 +1,43 @@
+﻿@page "/checkouts"
+@using LibraryAppBlazor.Models
+@inject NavigationManager NavManager
+
+<div class="d-flex justify-content-center">
+    <div class="custom-container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="mb-0">Zoznam výpožičiek</h1>
+        </div>
+        <table class="table table-borderless table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Názov knihy</th>
+                    <th scope="col">Čitateľ</th>
+                    <th scope="col">Dátum požičania</th>
+                    <th scope="col">Dátum vrátenia</th>
+                    <th scope="col">Stav knihy</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var checkout in CheckoutList)
+                {
+                    <tr>
+                        <td class="align-middle">@checkout.Book.Title</td>
+                        <td class="align-middle">@checkout.Member.Firstname&nbsp;@checkout.Member.Surname</td>
+                        <td class="align-middle">@checkout.CheckOutDate</td>
+                        <td class="align-middle">@checkout.ReturnDate</td>
+                        <td>
+                            @if (@checkout.Book.IsAvailable)
+                            {
+                                <span class="badge rounded-pill bg-success">Dostupná</span>
+                            }
+                            else
+                            {
+                                <span class="badge rounded-pill bg-dark">Nedostupná</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
